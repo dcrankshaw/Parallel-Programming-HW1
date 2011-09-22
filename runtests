@@ -19,6 +19,14 @@ echo >> $OUTFILE
 
 ## Speedup ##
 
+
+FLIPS=0
+
+for thread in `seq 1 500`;
+do
+    echo $thread $($COMMAND $PART $FLIPS $thread)
+done
+
 FLIPS=2000000000
 
 for thread in `seq 1 16`;
