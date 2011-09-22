@@ -21,16 +21,16 @@ P1FILES = CoinFlipMain.java FlipRunner.java
 P1PATH = $(SRCDIR)$(P1PACKAGE)
 P1SOURCES := $(addprefix $(P1PATH), $(P1FILES))
 
-P2FILES = 
+P2FILES = BruteForceDES.java DecryptionRunner.java SealedDES.java
 P2PATH = $(SRCDIR)$(P2PACKAGE)
 P2SOURCES := $(addprefix $(P2PATH), $(P2FILES))
 
 
 all: directory part1 part2
 
-part1: $(P1SOURCES:.java=.class)
+part1: directory $(P1SOURCES:.java=.class)
 
-part2: $(P2SOURCES:.java=.class)
+part2: directory $(P2SOURCES:.java=.class)
 
 print:;@echo $(P1SOURCES)
 

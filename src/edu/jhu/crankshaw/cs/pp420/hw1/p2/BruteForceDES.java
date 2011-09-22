@@ -1,3 +1,13 @@
+package edu.jhu.crankshaw.cs.pp420.hw1.p2;
+
+
+import javax.crypto.*;
+import java.security.*;
+import javax.crypto.spec.*;
+
+import java.util.Random;
+
+import java.io.PrintStream;
 
 public class BruteForceDES
 {
@@ -36,42 +46,34 @@ public class BruteForceDES
 		// Generate a sample string
 		String plainstr = "Johns Hopkins afraid of the big bad wolf?";
 		
-		// Encrypt
-		SealedObject sldObj = enccipher.encrypt ( plainstr );
-		
-		// Here ends the set-up.  Pretending like we know nothing except sldObj,
-		// discover what key was used to encrypt the message.
-		
-		// Get and store the current time -- for timing
 		long runstart;
 		runstart = System.currentTimeMillis();
+		Thread[] threads = new Thread[numThreads];
+		Runnable[] decrypters = new Runnable[numThreads];
 		
-		// Create a simple cipher
-		SealedDES deccipher = new SealedDES ();
+		long keySpaceSize = maxkey/numThreads;
 		
-		// Search for the right key
-		for ( long i = 0; i < maxkey; i++ )
+		for(int i = 0; i < numThreads; i++)
 		{
-			// Set the key and decipher the object
-			deccipher.setKey ( i );
-			String decryptstr = deccipher.decrypt ( sldObj );
-			
-			// Does the object contain the known plaintext
-			if (( decryptstr != null ) && ( decryptstr.indexOf ( "Hopkins" ) != -1 ))
-			{
-				//  Remote printlns if running for time.
-				p.printf("Found decrypt key %016x producing message: %s\n", i , decryptstr);
-				//System.out.println (  "Found decrypt key " + i + " producing message: " + decryptstr );
-			}
-			
-			// Update progress every once in awhile.
-			//  Remote printlns if running for time.
-			if ( i % 100000 == 0 )
-			{ 
-				long elapsed = System.currentTimeMillis() - runstart;
-				System.out.println ( "Searched key number " + i + " at " + elapsed + " milliseconds.");
-			}
+			SealedObject sldObj = enccipher.encrypt ( plainstr );
+			decrypters[i] = new DecryptionRunner(i, new SealedDES(), keySpaceSize*i, keySpaceSize*(i+1),
+					sldObj);
+			threads[i] = new Thread(decrypters[i]);
+			threads[i].start();
 		}
+		
+		for(int i = 0; i < numThreads; i++)
+		{
+			try {
+				threads[i].join();
+			}
+			catch(InterruptedException e) {
+			System.out.println("Join on thread [" + i + "] interrupted");
+			break;
+	    	}
+		}
+		
+		
 		
 		// Output search time
 		long elapsed = System.currentTimeMillis() - runstart;
