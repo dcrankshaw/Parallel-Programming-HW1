@@ -1,0 +1,26 @@
+#!/bin/bash
+
+PART1="edu.jhu.crankshaw.cs.pp420.hw1.p1.CoinFlipMain"
+PART2="edu.jhu.crankshaw.cs.pp420.hw1.p2.BruteForceDES"
+
+COMMAND="java -cp bin"
+
+OUTFILE="startup.txt"
+
+###################################
+# PART 1
+##################################
+
+echo startup
+
+echo Start up > $OUTFILE
+
+
+
+FLIPS=0
+for thread in `seq 20 20 1000`;
+do
+    echo $thread $($COMMAND $PART1 $FLIPS $thread) >> $OUTFILE
+done
+
+echo done

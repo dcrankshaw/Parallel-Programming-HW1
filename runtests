@@ -7,40 +7,42 @@ COMMAND="java -cp bin"
 
 OUTFILE="results.txt"
 
-PART=$PART1
 ###################################
 # PART 1
 ##################################
 
-echo Part 1 > $OUTFILE
-echo >> $OUTFILE
-echo Speedup >> $OUTFILE
-echo >> $OUTFILE
+#echo Part 1 > $OUTFILE
+#echo >> $OUTFILE
+#echo Speedup >> $OUTFILE
+#echo >> $OUTFILE
 
 ## Speedup ##
 
-FLIPS=2000000000
+FLIPS=1000000000
 
-for thread in `seq 1 16`;
-do
-    echo $thread $($COMMAND $PART $FLIPS $thread) >> $OUTFILE
-done
+#for thread in `seq 1 16`;
+#do
+#    echo $thread $($COMMAND $PART1 $FLIPS $thread) >> $OUTFILE
+#done
 
-echo Scaleup >> $OUTFILE
-echo >> $OUTFILE
+#echo done with speedup part 1
+
+#echo Scaleup >> $OUTFILE
+#echo >> $OUTFILE
 
 FLIPS=1000000000
-for thread in `seq 1 16`;
+for thread in `seq 16 16`;
 do
     
-    echo $thread $($COMMAND $PART $(($FLIPS*$thread)) $thread) >> $OUTFILE
+    echo $thread $($COMMAND $PART1 $(($FLIPS*$thread)) $thread) >> $OUTFILE
 done
 
 echo >> $OUTFILE
 echo >> $OUTFILE
 echo >> $OUTFILE
 
-PART=$PART2
+echo done part 1
+
 ###################################
 # PART 2
 ##################################
@@ -56,14 +58,39 @@ BITS=20
 
 for thread in `seq 1 16`;
 do
-    echo $thread $($COMMAND $PART $BITS $thread) >> $OUTFILE
+    echo $thread $($COMMAND $PART2 $BITS $thread) >> $OUTFILE
 done
+
+echo done speedup part 2
 
 echo Scaleup >> $OUTFILE
 echo >> $OUTFILE
 
 BITS=17
-for i in `seq 0 7`;
+for thread in `seq 0 7`;
 do
-    echo $thread $($COMMAND $PART $(($BITS + $i)) $((2^$i))) >> $OUTFILE
+    echo $thread $($COMMAND $PART2 $(($BITS + $thread)) $((2^$thread))) >> $OUTFILE
 done
+
+echo done scaleup part 2
+
+###############################
+# Startup
+##############################
+
+echo startup
+
+echo >> $OUTFILE
+echo >> $OUTFILE
+echo >> $OUTFILE
+echo Start up >> $OUTFILE
+
+
+
+FLIPS=0
+for thread in `seq 1 400`;
+do
+    echo $thread $($COMMAND $PART1 $thread) >> $OUTFILE
+done
+
+echo done

@@ -54,8 +54,8 @@ class CoinFlipMain
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = endTime - startTime;
 
-		System.out.println(numHeads + " heads in " + coinFlips + " coin tosses.");
-		System.out.println("Elapsed time: " + elapsedTime + "ms");
+		//System.out.println(numHeads + " heads in " + coinFlips + " coin tosses.");
+		System.out.println(elapsedTime);
 	    }
 	}
     }

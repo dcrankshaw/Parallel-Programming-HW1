@@ -17,7 +17,7 @@ MKDIR = mkdir -p
 .java.class:
 	$(JC) $(JFLAGS) $<
 
-P1FILES = CoinFlipMain.java FlipRunner.java CoinFlipMainStartup.java
+P1FILES = CoinFlipMain.java FlipRunner.java
 P1PATH = $(SRCDIR)$(P1PACKAGE)
 P1SOURCES := $(addprefix $(P1PATH), $(P1FILES))
 
