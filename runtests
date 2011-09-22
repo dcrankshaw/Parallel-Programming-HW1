@@ -1,0 +1,69 @@
+#!/bin/bash
+
+PART1="edu.jhu.crankshaw.cs.pp420.hw1.p1.CoinFlipMain"
+PART2="edu.jhu.crankshaw.cs.pp420.hw1.p2.BruteForceDES"
+
+COMMAND="java -cp bin"
+
+OUTFILE="results.txt"
+
+PART=$PART1
+###################################
+# PART 1
+##################################
+
+echo Part 1 > $OUTFILE
+echo >> $OUTFILE
+echo Speedup >> $OUTFILE
+echo >> $OUTFILE
+
+## Speedup ##
+
+FLIPS=2000000000
+
+for thread in `seq 1 16`;
+do
+    echo $thread $($COMMAND $PART $FLIPS $thread) >> $OUTFILE
+done
+
+echo Scaleup >> $OUTFILE
+echo >> $OUTFILE
+
+FLIPS=1000000000
+for thread in `seq 1 16`;
+do
+    
+    echo $thread $($COMMAND $PART $(($FLIPS*$thread)) $thread) >> $OUTFILE
+done
+
+echo >> $OUTFILE
+echo >> $OUTFILE
+echo >> $OUTFILE
+
+PART=$PART2
+###################################
+# PART 2
+##################################
+
+echo Part 2 >> $OUTFILE
+echo >> $OUTFILE
+echo Speedup >> $OUTFILE
+echo >> $OUTFILE
+
+## Speedup ##
+
+BITS=20
+
+for thread in `seq 1 16`;
+do
+    echo $thread $($COMMAND $PART $BITS $thread) >> $OUTFILE
+done
+
+echo Scaleup >> $OUTFILE
+echo >> $OUTFILE
+
+BITS=17
+for i in `seq 0 7`;
+do
+    echo $thread $($COMMAND $PART $(($BITS + $i)) $((2^$i))) >> $OUTFILE
+done

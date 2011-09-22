@@ -51,7 +51,11 @@ public class BruteForceDES
 		Thread[] threads = new Thread[numThreads];
 		Runnable[] decrypters = new Runnable[numThreads];
 		
-		long keySpaceSize = maxkey/numThreads;
+		long keySpaceSize = 0;
+		if(numThreads > 0)
+		{
+		    keySpaceSize = maxkey/numThreads;
+		}
 		
 		for(int i = 0; i < numThreads; i++)
 		{

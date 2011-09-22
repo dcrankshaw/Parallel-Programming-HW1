@@ -41,7 +41,7 @@ public class DecryptionRunner implements Runnable
 			if (( decryptstr != null ) && ( decryptstr.indexOf ( "Hopkins" ) != -1 ))
 			{
 				//  Remote printlns if running for time.
-				p.printf("Thread[%d] found decrypt key %016x producing message: %s\n", threadID, i , decryptstr);
+				//p.printf("Thread[%d] found decrypt key %016x producing message: %s\n", threadID, i , decryptstr);
 				//System.out.println (  "Found decrypt key " + i + " producing message: " + decryptstr );
 			}
 		}
