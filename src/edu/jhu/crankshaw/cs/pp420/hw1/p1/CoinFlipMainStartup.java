@@ -10,14 +10,14 @@ class CoinFlipMainStartup
     
     private static final int NUM_ARGS = 2;
     private static final int DEFAULT_NUM_THREADS = 1;
-    int long endTime;
+    long endTime;
     
     static long numHeads = 0;
 
     public static void main(String args[])
     {
 
-	for(int threads = 1; threads <= 1000; threads++)
+	for(int threads = 1; threads <= 100000; threads+=100)
 	{
 
 	long startTime = System.currentTimeMillis();
@@ -51,12 +51,12 @@ class CoinFlipMainStartup
 	   
 	}
 	else {
-	    printUsage();
+	    //printUsage();
 	    done = true;
 	}
 	
 	long endTime = flipCoins(1, threads);
-	System.out.println("Elapsed times: " + (startTime - endTime));
+	System.out.println("Threads: " + threads + "\tTime: " + (endTime - startTime));
 
 	}
 
@@ -94,7 +94,7 @@ class CoinFlipMainStartup
 		break;
 	    }
 	}
-	return success;
+	return endtime;
     }
 
 
