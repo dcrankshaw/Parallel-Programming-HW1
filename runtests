@@ -14,10 +14,9 @@ PART=$PART1
 
 echo Part 1 > $OUTFILE
 echo >> $OUTFILE
-echo Speedup >> $OUTFILE
-echo >> $OUTFILE
 
-## Speedup ##
+##Startup##
+echo Startup 1 >> $OUTFILE
 
 
 FLIPS=0
@@ -26,6 +25,10 @@ for thread in `seq 1 500`;
 do
     echo $thread $($COMMAND $PART $FLIPS $thread)
 done
+
+
+echo Speedup >> $OUTFILE
+echo >> $OUTFILE
 
 FLIPS=2000000000
 
