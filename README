@@ -1,1 +1,14 @@
-1st homework assignment for parallel programming
+To compile everything, use "make" or "make all". To remove generated binaries,
+use "clean". To compile just the coin flipping code, use "make part1" and
+for just the DES key code use "make part2".
+
+To run the coin flipping code from the root directory of the tarball, use
+"java -cp bin edu.jhu.crankshaw.cs.pp420.hw1.p1.CoinFlipMain NUMCOINS NUMTHREADS"
+replacing NUMCOINS and NUMTHREADS with your chosen values.
+
+Similarly, to run the DES key decryption code from the root of the tarball, use
+"java -cp bin edu.jhu.crankshaw.cs.pp420.hw1.p2.BruteForceDES KEYSIZE NUMTHREADS"
+where KEYSIZE is in number of bits.
+
+I placed my java projects into packages, which is why the qualified names of the
+class files are so long. Sorry about the length.
